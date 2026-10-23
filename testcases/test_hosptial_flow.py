@@ -2,6 +2,7 @@
 import pytest
 import time
 import datetime
+from datetime import timedelta
 from utils.data_util import generate_patient_info
 
 
@@ -14,7 +15,7 @@ class TestHospitalFlow:
         target_id_card = patient["mock_id_card"]  # <--- 1. 补充定义身份证变量，用于后续精准匹配
 
         # 获取今天的日期，解决日期不匹配的问题
-        today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+        today_str = (datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8)))).strftime("%Y-%m-%d")
         print(f"【当前使用的挂号日期】: {today_str}")
 
         # <--- 2. 这里必须把 today_str 传给接口，否则会报错
